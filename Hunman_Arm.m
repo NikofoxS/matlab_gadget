@@ -1,0 +1,15 @@
+L1=Link('d', 0.3, 'a', 0, 'alpha', pi/2);%L1为连杆1，‘a'为连杆1长度，’d'为关节2相对1偏长，‘alpha'为关节2相对1的扭角，’theta’为关节1的转角
+L2=Link('d',0,'a',0,'alpha',pi/2);
+L3=Link('d',0.5,'a',0,'alpha',pi/2);
+L4=Link('d',0,'a',0,'alpha',pi/2);
+L5=Link('d',0.5,'a',0,'alpha',-pi/2);
+L6=Link('d',0,'a',0,'alpha',0);
+%L6=Link('d',0,'a',0。2,'alpha',0);
+%L7=Link('d',0,'a',0,'alpha',0);%假设L7为末端执行器，关节q7一直取初始值
+%HunmanArm.links(1,6).offset=-pi/2;%设定关节6初始位置
+HunmanArm=SerialLink([L1,L2,L3,L4,L5,L6],'name','HunmanArmm');
+HunmanArm.links(1,2).offset=pi/2;%设定关节2初始位置
+HunmanArm.links(1,1).offset=-pi/2;%设定关节1初始位置
+HunmanArm.links(1,4).offset=pi;%设定关节4初始位置
+HunmanArm.links(1,6).offset=-pi/2;%设定关节6初始位置
+HunmanArm.base=transl(0,0,1)*trotx(pi/2);%设定关节1与基坐标系相对位置
